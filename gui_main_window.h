@@ -1,22 +1,32 @@
-#ifndef GUI_MAIN_WINDOW_H
-#define GUI_MAIN_WINDOW_H
+/// @file
+///
+/// @author Ralph Tandetzky
+/// @date 28 Feb 2014
+
+#pragma once
 
 #include <QMainWindow>
+#include <memory>
 
-namespace Ui {
-class MainWindow;
-}
+namespace gui
+{
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
     
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow( QWidget * parent = nullptr );
     ~MainWindow();
+
+private slots:
+    void selectInputFile();
+    void selectOutputFiles();
+    void runConversion();
     
 private:
-    Ui::MainWindow *ui;
+    struct Impl;
+    std::unique_ptr<Impl> m;
 };
 
-#endif // GUI_MAIN_WINDOW_H
+} // namespace gui
